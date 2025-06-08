@@ -94,6 +94,10 @@ The `Photo` class provides a chainable interface to customize the photo message.
   Sets the business connection ID for the message.  
   *Example*: `$photo->businessConnectionId('biz_123');`
 
+- **`chatId(string|int $chat_id)`**  
+Sets the `chat_id` for the message.  
+`Example: $video->chatId(123456789)`
+
 - **messageThreadId(int $message_thread_id)**  
   Specifies the message thread ID for sending in a thread.  
   *Example*: `$photo->messageThreadId(456);`

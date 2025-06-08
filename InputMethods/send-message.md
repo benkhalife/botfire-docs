@@ -247,7 +247,7 @@ $message->replyMarkup($keyboard);
 Bot::sendMessage($message);
 ```
 Result in bot:
-![Sending a Formatted Message with an Inline Keyboard](./assets/sendMessage-Image-sample.png)
+![Sending a Formatted Message with an Inline Keyboard](./../assets/sendMessage-Image-sample.png)
 
 
 ## Notes
