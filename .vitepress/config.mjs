@@ -32,13 +32,13 @@ export default defineConfig({
       {
         text:"Send Methods",
         items:[
-          {text:'Send Message', link:'/InputMethods/send-message'},
-          {text:'Send Photo', link:'/InputMethods/send-photo'},
-          {text:'Send Video', link:'/InputMethods/send-video'},
-          {text:'Send Audio', link:'/send-audio'},
-          {text:'Send Document', link:'/send-document'},
-          {text:'Send Location', link:'/send-location'},
-          {text:'Send Contact', link:'/send-contact'},
+          {text:'Send Message', link:'/input-methods/send-message'},
+          {text:'Send Photo', link:'/input-methods/send-photo'},
+          {text:'Send Video', link:'/input-methods/send-video'},
+          {text:'Send Audio', link:'/input-methods/send-audio'},
+          {text:'Send Document', link:'/input-methods/send-document'},
+          {text:'Send Location', link:'/input-methods/send-location'},
+          {text:'Send Contact', link:'/input-methods/send-contact'},
           // {text:'Send Poll', link:'/send-poll'},
         ]
       },

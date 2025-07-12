@@ -1,69 +1,56 @@
-# BotFire : sendVideo Methods Documation
+# BotFire : sendAudio Methods Documation
 
-the `sendMethod` the **BotFire** library is designed to send videos via a Telegram Bot.
-It offers a flexible interface to send images either by passing a URL or file_id as a string or useing the `Video` class for advanced control over the message.
+the `sendAudio` the **BotFire** library is designed to send audio via a Telegram Bot.
+It offers a flexible interface to send audios either by passing a URL or file_id as a string or useing the `Audio` class for advanced control over the message.
 
+# Method signature
 
-## Method signature
-
-```php
+```PHP
 use Botfire\Bot;
-Bot::sendVideo(Video|string $video);
+Bot::sendAudio(Audio|string $audio);
 ```
 
- - **Parameter**: `$video` - Accepts either a string (URL or Telegram file_id of the video) or an instance of the `Video` class.
+- Parameter: `$audio` Accepts either a string (URL or Telegram file_id of the audio) or an instance of the Audio class
 
- #### Supported Video Formats
-
-- Formats: MP4, MOV, or other Telegram-supported formats.
-- Maximum file size: 50 MB for bots (as per Telegram API limits, subject to change).
+### Supported Audio Formats
+- Formats: MP3, M4A
+- Maximum file size: 50 MB for bots(as Telegram API limits)
 
 > [!NOTE]
-> [See Telegram's sendVideo documentation](https://core.telegram.org/bots/api#sendvideo)
- 
- ### Simple Usage
+> [See Telegram's sendAudio documentation](https://core.telegram.org/bots/api#sendAudio)
 
- For basic video sendig, you can pass a string containing either the URL of the video or its Telegram `file_id`. If the `chat_id` is not specified, the BotFire automatically assigns the current client's `chat_id`.
+### Simple Usage
 
- ```php
+For basic audio sendig, you can pass a string containing either the URL of the audio or its Telegram `file_id`. if the `chat_id` is not specified, the Botfire automatically assigns the current client's `chat_id`
+
+```PHP
 use Botfire\Bot;
 
 // Send a video using a URL
-Bot::sendVideo('https://example.com/sample-video.mp4');
+Bot::sendAudio('https://example.com/sample-video.mp4');
 
-Bot::sendVideo('AgACAgIAAxkBAAIB...');
- ```
-
-You can also send a local file from the server useing the `Bot::inputFile` method:
-
-```php
-$file = Bot::inputFile('image-video.jpg');
-
-Bot::sendVideo($file);
+Bot::sendAudio('AgACAgIAAxkBAAIB...');
 ```
 
+## Audio Class Methods
+The `Audio` class provides a chainable interface the audio message.
 
-
-
-## Video Class Methods
-The `Video` class provides a chainable interface to customize the video message.
-
-### Basic Useing Video Class
-
-```php
+### Basic Useing Audio Class
+```PHP
 use Botfire\Bot;
 use Botfire\Models\Video;
 
-$video = Video::create('URL Or file_id');
-$video->chatId(123456789);
-$video->caption('This is video');
+$audio = Audio::create('URL Or file_id');
+$audio->chatId(123456789);
+$audio->caption('This is video');
 ```
 
 ### Below is a detailed list of available methods:
 
- - **businessConnectionId(string $business_connection_id)**  
- Sets the business connection id for the message.  
-  `Example: $video->businessConnectionId('biz_123');`
+- **businessConnectionId(string $business_connection_id)**
+Sets the business connection id for the message.  
+`Example: $video->businessConnectionId('biz_123');`
+
 
 - **`chatId(string|int $chat_id)`**  
 Sets the `chat_id` for the message.  
@@ -76,20 +63,6 @@ Specifies the message thread ID for sending in a thread.
 - **duration(int $duration)**  
 Sets Duration of sent video in seconds  
 *Example*: `$video->duration(10)`
-
-- **width(int $width)**  
-Sets Video width  
-*Example*: `$video->width(400)`
-
-- **height(int $height)**  
-Sets Video height  
-*Example*: `$video->height(400)`
-
-- **cover($cover)**  
-Sets Cover for the video in the message
-
-- **startTimestamp(int start_timestamp)**  
-Start timestamp for the video in the message
 
 
 - **parseMode(string $parse_mode)**  
@@ -124,14 +97,6 @@ Start timestamp for the video in the message
   Sets a message effect ID for visual effects.  
   *Example*: `$video->messageEffectId('effect_789');`
 
-- **hasSpoiler(bool $has_spoiler)**  
-  Marks the video as a spoiler, blurring it until viewed if set to `true`.  
-  *Example*: `$video->hasSpoiler(true);`
-
-- **showCaptionAboveMedia(bool $show_caption_above_media)**  
-  Displays the caption above the video if set to `true`.  
-  *Example*: `$video->showCaptionAboveMedia(true);`
-
 - **replyParameters($reply_parameters)**  
   Configures reply parameters for the message.  
   *Example*: `$video->replyParameters(['message_id' => 123]);`
@@ -145,7 +110,7 @@ Start timestamp for the video in the message
 
 ```php
 use Botfire\Bot;
-use Botfire\Models\Video;
+use Botfire\Models\Audio;
 use Botfire\Helper\ParseMode;
 use Botfire\Keyboards\InlineKeyboard;
 
@@ -155,13 +120,12 @@ $keyboard->row([
     InlineButton::link('Visit Website', 'https://example.com'),
 ]);
 
-$video = Video::create('https://example.com/sample-video.mp4');
-$video->chatId(123456789)
+$audio = Audio::create('https://example.com/sample-video.mp4');
+$audio->chatId(123456789)
       ->caption('Check out this *video*')
       ->parseMode(ParseMode::MarkdownV2)
       ->disableNotification(true)
-      ->hasSpoiler(true)
       ->replyMarkup($keyboard);
 
-Bot::sendVideo($video);
+Bot::sendAudio($audio);
 ```
