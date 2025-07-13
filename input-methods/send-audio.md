@@ -26,8 +26,8 @@ For basic audio sendig, you can pass a string containing either the URL of the a
 ```PHP
 use Botfire\Bot;
 
-// Send a video using a URL
-Bot::sendAudio('https://example.com/sample-video.mp4');
+// Send a audio using a URL
+Bot::sendAudio('https://example.com/sample-audio.mp4');
 
 Bot::sendAudio('AgACAgIAAxkBAAIB...');
 ```
@@ -38,68 +38,68 @@ The `Audio` class provides a chainable interface the audio message.
 ### Basic Useing Audio Class
 ```PHP
 use Botfire\Bot;
-use Botfire\Models\Video;
+use Botfire\Models\Audio;
 
 $audio = Audio::create('URL Or file_id');
 $audio->chatId(123456789);
-$audio->caption('This is video');
+$audio->caption('This is audio');
 ```
 
 ### Below is a detailed list of available methods:
 
 - **businessConnectionId(string $business_connection_id)**
 Sets the business connection id for the message.  
-`Example: $video->businessConnectionId('biz_123');`
+`Example: $audio->businessConnectionId('biz_123');`
 
 
 - **`chatId(string|int $chat_id)`**  
 Sets the `chat_id` for the message.  
-`Example: $video->chatId(123456789)`
+`Example: $audio->chatId(123456789)`
 
 - **messageThreadId(int $message_thread_id)**  
 Specifies the message thread ID for sending in a thread.  
-*Example*: `$video->messageThreadId(456);`
+*Example*: `$audio->messageThreadId(456);`
 
 - **duration(int $duration)**  
-Sets Duration of sent video in seconds  
-*Example*: `$video->duration(10)`
+Sets Duration of sent audio in seconds  
+*Example*: `$audio->duration(10)`
 
 
 - **parseMode(string $parse_mode)**  
   Sets the parse mode for the caption (`Markdown`, `MarkdownV2`, or `HTML`).  
-  *Example*: `$video->parseMode(ParseMode::MarkdownV2);`
+  *Example*: `$audio->parseMode(ParseMode::MarkdownV2);`
 
 - **caption(string|MarkdownBuilder $caption)**  
-  Adds a caption to the video. If a [`MarkdownBuilder`](/markdown-builder.md) instance is provided, it automatically sets `parseMode` to `MarkdownV2`.  
-  *Example*: `$video->caption('This is a *bold* caption.');`
+  Adds a caption to the audio. If a [`MarkdownBuilder`](/markdown-builder.md) instance is provided, it automatically sets `parseMode` to `MarkdownV2`.  
+  *Example*: `$audio->caption('This is a *bold* caption.');`
 
 - **captionEntities($caption_entities)**  
   Specifies entities for the caption (e.g., for custom formatting).  
-  *Example*: `$video->captionEntities([['type' => 'bold', 'offset' => 0, 'length' => 4]]);`
+  *Example*: `$audio->captionEntities([['type' => 'bold', 'offset' => 0, 'length' => 4]]);`
 
 - **entities($entities)**  
   Sets entities for the message content.  
-  *Example*: `$video->entities([['type' => 'text_link', 'offset' => 0, 'length' => 4, 'url' => 'https://example.com']]);`
+  *Example*: `$audio->entities([['type' => 'text_link', 'offset' => 0, 'length' => 4, 'url' => 'https://example.com']]);`
 
 - **disableNotification(bool $disable_notification)**  
   Disables notifications for the message if set to `true`.  
-  *Example*: `$video->disableNotification(true);`
+  *Example*: `$audio->disableNotification(true);`
 
 - **protectContent(bool $protect_content)**  
   Protects the content from being forwarded or saved if set to `true`.  
-  *Example*: `$video->protectContent(true);`
+  *Example*: `$audio->protectContent(true);`
 
 - **allowPaidBroadcast(bool $allow_paid_broadcast)**  
   Allows the message to be sent as a paid broadcast if set to `true`.  
-  *Example*: `$video->allowPaidBroadcast(true);`
+  *Example*: `$audio->allowPaidBroadcast(true);`
 
 - **messageEffectId(string $message_effect_id)**  
   Sets a message effect ID for visual effects.  
-  *Example*: `$video->messageEffectId('effect_789');`
+  *Example*: `$audio->messageEffectId('effect_789');`
 
 - **replyParameters($reply_parameters)**  
   Configures reply parameters for the message.  
-  *Example*: `$video->replyParameters(['message_id' => 123]);`
+  *Example*: `$audio->replyParameters(['message_id' => 123]);`
 
 - **replyMarkup(InlineKeyboard|ReplyKeyboard $reply_markup)**  
   Adds a custom keyboard or inline buttons to the message.  
@@ -120,9 +120,9 @@ $keyboard->row([
     InlineButton::link('Visit Website', 'https://example.com'),
 ]);
 
-$audio = Audio::create('https://example.com/sample-video.mp4');
+$audio = Audio::create('https://example.com/sample-audio.mp3');
 $audio->chatId(123456789)
-      ->caption('Check out this *video*')
+      ->caption('Check out this *audio*')
       ->parseMode(ParseMode::MarkdownV2)
       ->disableNotification(true)
       ->replyMarkup($keyboard);
