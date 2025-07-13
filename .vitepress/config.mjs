@@ -36,6 +36,7 @@ export default defineConfig({
           {text:'Send Photo', link:'/input-methods/send-photo'},
           {text:'Send Video', link:'/input-methods/send-video'},
           {text:'Send Audio', link:'/input-methods/send-audio'},
+          {text:'Send Voice', link:'/input-methods/send-voice'},
           {text:'Send Document', link:'/input-methods/send-document'},
           {text:'Send Location', link:'/input-methods/send-location'},
           {text:'Send Contact', link:'/input-methods/send-contact'},
