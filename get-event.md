@@ -9,7 +9,7 @@ To access the `getEvent` method, use the `Bot` class as follows:
 ```php
 use Botfire\Bot;
 
-$message = Bot::getEvent();
+$event = Bot::getEvent();
 ```
 
 This method processes incoming webhook data from Telegram and provides a structured way to interact with the event.
@@ -101,7 +101,7 @@ Returns the unique identifier for the update, as described by the Telegram API:
 
 #### Example
 ```php
-$update_id = Bot::getEvent()->getType();
+$update_id = Bot::getEvent()->getUpdateId();
 ```
 
 ## Notes
