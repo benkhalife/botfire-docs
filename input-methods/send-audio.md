@@ -106,7 +106,7 @@ Sets Duration of sent video in seconds
 [See the keyboard documentation](/keyboards.md)
 
 
-### Example with Advanced Options
+## Example with Advanced Options
 
 ```php
 use Botfire\Bot;
