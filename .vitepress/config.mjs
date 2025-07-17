@@ -38,8 +38,9 @@ export default defineConfig({
           {text:'Send Audio', link:'/input-methods/send-audio'},
           {text:'Send Voice', link:'/input-methods/send-voice'},
           {text:'Send Document', link:'/input-methods/send-document'},
-          {text:'Send Location', link:'/input-methods/send-location'},
-          {text:'Send Contact', link:'/input-methods/send-contact'},
+          {text:'Send Chat Action', link:'/input-methods/send-chat-action'},
+          // {text:'Send Location', link:'/input-methods/send-location'},
+          // {text:'Send Contact', link:'/input-methods/send-contact'},
           // {text:'Send Poll', link:'/send-poll'},
         ]
       },
