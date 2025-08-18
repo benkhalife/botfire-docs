@@ -1,54 +1,39 @@
-# BotFire: `sendMessage` Method Documentation
+# Send text message via Telegram bot
 
-The `sendMessage` method in the BotFire PHP library provides a simple and flexible way to send text messages via a Telegram bot. This method supports both basic text messages and advanced message configurations using the `Message` class for enhanced control over message properties.
+Text messages are one of the first and easiest ways to intract with a user.  
+To create and send text messages to users in the bot or Telegram channels, we use the `Message` class, which allows for message customization
 
-## Overview
 
-The `sendMessage` method allows developers to send text messages to Telegram users or channels. It accepts either a simple string or a Message object, allowing for detailed message delivery and customization.
 
-### Method Signature
+### Basic Usage : Simple example of sending a message
 
 ```php
-use Botfire\Bot;
+use Botfire\Models\Message;
 
-Bot::sendMessage(Message|string $text);
+Message::create('Hello From Telegram Bot')
+    ->chatId('1234567')
+    ->send();
 ```
-
-- **Parameters**:
-  - `$text` (`Message|string`): The message content to be sent. This can be a plain text string or a `Message` object for advanced configurations.
-- **Returns**: The result of the send operation, typically a response from the Telegram Bot API.
-
-### Basic Usage
+This sends the message "Hello From Telegram Bot" to the user who initiated the interaction.
 
 For simple scenarios, you can send a text message directly to the current user (the one who triggered the bot) without specifying a `chat_id`. The BotFire library automatically sets the `chat_id` to the current client's ID if not provided.
 
-```php
-use Botfire\Bot;
 
-Bot::sendMessage('Hello From Telegram Bot');
+
+```php
+Message::create('Hello From Telegram Bot')->send();
 ```
 
-This sends the message "Hello From Telegram Bot" to the user who initiated the interaction.
 
-### Advanced Usage with `Message` Class
+
+## Advanced Usage with `Message` Class
 
 For more control over the message, use the `Message` class to configure additional properties such as chat ID, parse mode, inline keyboards, and more.
 
-```php
-use Botfire\Bot;
-use Botfire\Models\Message;
 
-$message = Message::create('Hello From Telegram Bot');
-$message->chatId(123456789);
+### Configuring Messages with the `Message` Class
 
-Bot::sendMessage($message);
-```
-
-This example sends a message to a specific chat ID (`123456789`), allowing precise targeting of recipients.
-
-## Configuring Messages with the `Message` Class
-
-The `Message` class offers a fluent, chainable interface to customize properties of a message before sending it via the `Bot::sendMessage` method. This allows developers to fine-tune aspects like recipient targeting, text formatting, notifications, and interactive elements. Below is a detailed breakdown of the available configuration methods, designed for clarity and ease of use.
+The `Message` class offers a fluent, chainable interface to customize properties of a message. This allows developers to fine-tune aspects like recipient targeting, text formatting, notifications, and interactive elements. Below is a detailed breakdown of the available configuration methods.
 
 ### Available Configuration Methods
 
@@ -147,7 +132,7 @@ use Botfire\Keyboard\InlineButton;
 use Botfire\Keyboard\InlineKeyboard;
 use Botfire\Models\Message;
 
-$message = Message::create('Welcome to my *Telegram* bot!')
+$message = Message::create('Welcome to my **Telegram** bot!')
     ->chatId(123456789)
     ->parseMode(ParseMode::MarkdownV2)
     ->disableNotification(true)
@@ -158,13 +143,14 @@ $message = Message::create('Welcome to my *Telegram* bot!')
         ])
     );
 
-Bot::sendMessage($message);
+$message->send();
 ```
 
 This configuration sends a Markdown-formatted message to a specific chat, without a notification sound, and includes an inline keyboard with two buttons.
 
 > [!TIP]
-> Chain methods fluently to create concise and readable code. For example, `$message->chatId(123)->parseMode(ParseMode::HTML)->disableNotification(true);`
+> Chain methods fluently to create concise and readable code. For example :  
+`$message->chatId(123)->parseMode(ParseMode::HTML)->disableNotification(true);`
 
 ### Formatting Options
 
@@ -175,11 +161,11 @@ use Botfire\Bot;
 use Botfire\Helper\ParseMode;
 use Botfire\Models\Message;
 
-$message = Message::create('Hello, this is a *test* message!');
-$message->chatId(12345678);
-$message->parseMode(ParseMode::MarkdownV2);
+Message::create('Hello, this is a *test* message!')
+    ->chatId(12345678);
+    ->parseMode(ParseMode::MarkdownV2)
+    ->send();
 
-Bot::sendMessage($message);
 ```
 
 **Available Parse Modes**:
@@ -216,14 +202,6 @@ Bot::sendMessage($message);
 > [!TIP]
 > For more details on creating and customizing keyboards, refer to the [Keyboards Documentation](/keyboards.html).
 
-## Example Scenarios
-
-### Sending a Simple Message
-```php
-use Botfire\Bot;
-
-Bot::sendMessage('Welcome to my Telegram bot!');
-```
 
 ### Sending a Formatted Message with an Inline Keyboard
 ```php
@@ -243,8 +221,7 @@ $message = Message::create('Welcome to my *Telegram* bot!');
 $message->chatId(12345678);
 $message->parseMode(ParseMode::MarkdownV2);
 $message->replyMarkup($keyboard);
-
-Bot::sendMessage($message);
+$message->send();
 ```
 Result in bot:
 ![Sending a Formatted Message with an Inline Keyboard](./../assets/sendMessage-Image-sample.png)
