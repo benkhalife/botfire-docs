@@ -1,68 +1,42 @@
 # BotFire : sendPhoto Method Documentation
 
-The `sendPhoto` method in the **BotFire** PHP library is designed to send photos via a Telegram bot. It offers a  flexible interface to send images either by passing a URL or file ID as a string or by using the `Photo` class for advanced control over the message.
-## Overview
+We use the `Photo` class for send images. We can set a caption, keyboards and other supported methods for it.
 
-The `sendPhoto` method enables developers to send photos to Telegram users or chats. It supports both simple and advanced use cases, allowing you to send a photo with minimal code or customize the message with additional parameters like captions, formatting, and reply markups.
 
-### Method Signature
+## Basic Usage : Send a photo
 
-```php
-use Botfire\Bot;
-
-Bot::sendPhoto(Photo|string $photo);
-```
-
-- **Parameter**: `$photo` - Accepts either a string (URL or Telegram file ID of the photo) or an instance of the `Photo` class.
-- **Return**: Sends the photo to the specified chat and returns the result.
-
-### Simple Usage
-
-For basic photo sending, you can pass a string containing either the URL of the photo or its Telegram `file_id`. If the `chat_id` is not specified, the library automatically assigns the current client's `chat_id`.
+In the example below, we send a photo using its link within the Telegram bot:
 
 ```php
-use Botfire\Bot;
+use Botfire\Photo;
 
 // Send a photo using a URL
-Bot::sendPhoto('https://your-site.com/test.png');
-
-// Send a photo using a file ID
-Bot::sendPhoto('AgACAgIAAxkBAAIB...');
+Photo::create('https://your-site.com/test.png')
+    ->chatId(123456789)
+    ->send();
 ```
 
-### Advanced Usage with Photo Class
-
-For more control, use the `Photo` class to create a photo message with additional parameters such as captions, chat IDs, or custom formatting.
+To send an image that is located on our server:
 
 ```php
-use Botfire\Bot;
-use Botfire\Models\Photo;
+$image_file = Bot::inputFile(realpath('public/files/images/test.php'))
 
-// Create a photo message
-$photo = Photo::create('https://your-site.com/test.png');
-$photo->chatId(123456789); // Specify the chat ID
-
-// Send the photo
-Bot::sendPhoto($photo);
+Photo::create($image_file)
+    ->chatId(12345678)
+    ->send();
 ```
 
-You can also send a local file from the server using the `Bot::inputFile` method:
+Or, the image can be sent using its file_id :
 
 ```php
-use Botfire\Bot;
-use Botfire\Models\Photo;
-
-// Load a local file
-$file = Bot::inputFile('image-photo.jpg');
-
-// Create a photo message with a caption
-$photo = Photo::create($file);
-$photo->chatId(123456789);
-$photo->caption('This is a test photo with a caption.');
-
-// Send the photo
-Bot::sendPhoto($photo);
+Photo::create('AgACAgIAAxkBAAIB...')
+    ->chatId(12345678)
+    ->send();
 ```
+> [!NOTE]
+> Explanation of the `file_id`:  
+>  > When a user uploads and sends an image inside the Telegram bot, Telegram generates an identifier for that image called "file_id", which makes reusing that image easier.
+
 
 ### Using Markdown for Captions
 
@@ -77,8 +51,7 @@ $photo = Photo::create('https://your-site.com/test.png');
 $photo->chatId(123456789);
 $photo->caption('This is a *bold* test photo with a caption.');
 $photo->parseMode(ParseMode::MarkdownV2);
-
-Bot::sendPhoto($photo);
+$photo->send();
 ```
 
 **Available Parse Modes** (defined in `ParseMode` class):
@@ -175,12 +148,8 @@ $photo->chatId(123456789)
       ->disableNotification(true)
       ->hasSpoiler(true)
       ->linkPreviewOptions(['is_disabled' => true])
-      ->replyMarkup($keyboard);
+      ->replyMarkup($keyboard)
+      ->send();
 
-Bot::sendPhoto($photo);
 ```
 
-### Notes
-- If the `chat_id` is not set, the library automatically uses the `chat_id` of the current client.
-- The `Photo` class methods are chainable, allowing for concise and readable code.
-- For local files, ensure the file path provided to `Bot::inputFile` is accessible on the server.
