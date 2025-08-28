@@ -1,4 +1,4 @@
-# Send photo Message in Telegram Bot
+# Send Photo Message in Telegram Bot
 
 We use the `Photo` class for send images. We can set a caption, keyboards and other supported methods for it.
 
