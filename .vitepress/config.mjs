@@ -21,7 +21,7 @@ export default defineConfig({
         ],
       },
       {
-        text:"Input Methods",
+        text:"Callback And Event Methods",
         items:[
           {text:'Get Event', link:'/get-event'},
           {text:'Get Message', link:'/get-message'},
@@ -32,13 +32,13 @@ export default defineConfig({
       {
         text:"Send Methods",
         items:[
-          {text:'Send Message', link:'/input-methods/send-message'},
-          {text:'Send Photo', link:'/input-methods/send-photo'},
-          {text:'Send Video', link:'/input-methods/send-video'},
-          {text:'Send Audio', link:'/input-methods/send-audio'},
-          {text:'Send Voice', link:'/input-methods/send-voice'},
-          {text:'Send Document', link:'/input-methods/send-document'},
-          {text:'Send Chat Action', link:'/input-methods/send-chat-action'},
+          {text:'Send Message', link:'/send-methods/send-message'},
+          {text:'Send Photo', link:'/send-methods/send-photo'},
+          {text:'Send Video', link:'/send-methods/send-video'},
+          {text:'Send Audio', link:'/send-methods/send-audio'},
+          {text:'Send Voice', link:'/send-methods/send-voice'},
+          {text:'Send Document', link:'/send-methods/send-document'},
+          {text:'Send Chat Action', link:'/send-methods/send-chat-action'},
           // {text:'Send Location', link:'/input-methods/send-location'},
           // {text:'Send Contact', link:'/input-methods/send-contact'},
           // {text:'Send Poll', link:'/send-poll'},
